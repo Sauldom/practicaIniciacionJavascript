@@ -50,8 +50,38 @@ const datos = [
     ]
     }
     ];
+//hago una funcion que toma una lista y una habilidad y recorre la lista en busca de la habilidad y si encuentra lo mete en un array 
+function busquedaHabilidad (list, skill){
+    let chosen = [];
+    for (let i =0;i<list.length;i++){
+        if (list[i].habilidades.includes(skill)){
+            chosen.push(list[i]); // en principio habia puesto que devolviera solo los nombres en el array
+        }
+    }
 
-function busqueda (lista){
-
+    return chosen;
     
 }
+//console.log(datos[0].habilidades.includes('JavaScript'));
+
+console.log(busquedaHabilidad(datos, 'JavaScript'));
+const desarrolladoresJavascript = busquedaHabilidad(datos, 'JavaScript');
+console.log(desarrolladoresJavascript);
+
+//lista de los proyectos en los que trabajan
+
+//console.log(datos[0].proyectos[0].nombre);
+function projects(list){
+    let arrayProjects =[];
+    for(let i =0;i<list.length;i++){
+        for (let j=0;j<list[i].proyectos.length;j++){
+            if(!arrayProjects.includes(list[i].proyectos[j].nombre)){
+                arrayProjects.push(list[i].proyectos[j].nombre);
+            }
+        }
+    }
+    return arrayProjects;
+}
+//const array=[]
+//console.log(!array.includes(datos[0].proyectos[0].nombre));
+console.log(projects(datos));
