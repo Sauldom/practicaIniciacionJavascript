@@ -50,29 +50,73 @@ duración de todas las canciones en el catálogo. (opcional)
 */
     function crearCatalogo(){
 
-      let catalogo=[];
+      this.catalogo=[];
 
       function agregarCancion(name, genre, duration){
         catalogo.push({
           nombre: name,
           genero : genre,
           duracion: duration
-        })
-    };
+        });
+      };
       function verCatalogo(){
         return(console.log(catalogo));
-      }
-    return {
-      agregarCancion: agregarCancion,
-      verCatalogo: verCatalogo
-    }
-    }
+      };
+
+      function listarCanciones(){
+        if (catalogo.length ===0){
+          console.log('Pues no hay nada de nada');
+        }else{
+          catalogo.map(function (cancion){
+            console.log(`Cancion: ${cancion.nombre} --- Estilo: ${cancion.genero} --- Duracion:${cancion.duracion}`);
+            });
+        }
+        };
+        
+      function buscarCancionesGenero(genero=prompt('Introduce el genero musical a buscar: ')){
+          
+        const result = catalogo.filter((cancion) =>cancion.genero === genero);
+        if (result.length ===0){
+          console.log('No hay ninguna cancion con ese genero');
+         }else{
+          console.log(result);
+        };
+      };
+
+      function calcularPromedioDuracion(){
+        let suma =0;
+        for(i=0;i<catalogo.length;i++){
+          suma+=catalogo[i].duracion;
+        }
+        return suma/catalogo.length;
+      };
+        
+        return {
+          agregarCancion: agregarCancion,
+          verCatalogo: verCatalogo,
+          listarCanciones : listarCanciones,
+          buscarCancionesGenero: buscarCancionesGenero,
+          calcularPromedioDuracion: calcularPromedioDuracion
+        }
+    };
+    
 
 
     let miCatalogo = crearCatalogo();
+    miCatalogo.listarCanciones();
 
     miCatalogo.agregarCancion('Master of puppets', 'Metal',8.35 );
     miCatalogo.agregarCancion('anvil of crom', 'OST',2.38  );
+    miCatalogo.agregarCancion('hola', 'pop',3.38  );
+
     console.log(miCatalogo);
     miCatalogo.verCatalogo();
+    miCatalogo.listarCanciones();
+    miCatalogo.buscarCancionesGenero();
+    miCatalogo.agregarCancion('hola2', 'pop',3.38  );
+    miCatalogo.agregarCancion('hola3', 'pop',3.38  );
+    miCatalogo.buscarCancionesGenero();
+    console.log(miCatalogo.calcularPromedioDuracion());
+
+
 
