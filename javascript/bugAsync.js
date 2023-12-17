@@ -1,19 +1,3 @@
-// Este programa simula una llamada asincrónica para obtener un usuario
-/*function obtenerUsuario(id) {
-    let usuario;
-    setTimeout(() => {
-    if (id === 1) {
-    usuario = { id: 1, nombre: 'John Doe' };
-    }
-    }, 2000);
-    return usuario;
-    }
-    const usuario = obtenerUsuario(1);
-    console.log(usuario);
-
-*/
-
-
 //primero devuelvo una promesa del usuario
 function obtenerUsuarioMod(id) {
     let usuario;
@@ -31,7 +15,8 @@ function obtenerUsuarioMod(id) {
 const main = async () =>{
     const usuario2 = await obtenerUsuarioMod(1);
     console.log(usuario2);
+    //console.log('fin del carga del usuario');
 };
 //ejecuto el main
 main();
-    
+//console.log('fuera del main');
