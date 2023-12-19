@@ -40,7 +40,6 @@ const createMatch =  ((player1, player2) =>{
             marcador:0,
             puntos : [0,15,30,40,'win', 'deuce', 'ventaja'],
             rondas:0,
-            sets:0,
             juegos:0
         },
         jugador2:{
@@ -48,35 +47,62 @@ const createMatch =  ((player1, player2) =>{
             marcador:0,
             puntos:[0,15,30,40,'win', 'deuce', 'ventaja'],
             rondas:0,
-            sets:0,
             juegos:0
         },
         win: false,
+        deuce:false,
 
         pointWonBy: pointWonBy = ((player)=>{
+            
             if (player ===1){
                 game.jugador1.marcador +=1;
-            }else if (player ===2){
-                game.jugador2.marcador +=1;
-            }else{
-                console.log('El numero introducido es incorrecto introduzca 1 o 2 para puntuar jugador');
-            };
-            return game.checkWin();
+             }else if (player ===2){
+              game.jugador2.marcador +=1;
+             }else{
+              console.log('El numero introducido es incorrecto introduzca 1 o 2 para puntuar jugador');
+             };                   
+             
+             if(game.checkDeuce()){
+                if (game.jugador1.marcador===6 && game.jugador2.marcador===6){
+                    game.jugador1.marcador-=1;
+                    game.jugador2.marcador-=1;
+                    console.log(`Los jugadores vuelve a deuce`);
+                }else  if(game.jugador1.marcador===7){
+                    game.jugador1.marcador =4;
+                    game.deuce=false;
+                }else if(game.jugador2.marcador ===7){
+                    game.jugador2.marcador=4;
+                    game.deuce=false;
+                }
+             }
+            
+
+            
+            game.checkWinRound();            
          }),
-         getCurrentRoundScore: getCurrentRoundScore =(()=>{
-            console.log(` ${game.jugador1.nombre}  ${game.jugador1.puntos[game.jugador1.marcador]}  -  ${game.jugador2.puntos[game.jugador2.marcador]}  ${game.jugador2.nombre}  `);
+
+        getCurrentRoundScore: getCurrentRoundScore =(()=>{
+            console.log(`Marcador ${game.jugador1.nombre}  ${game.jugador1.puntos[game.jugador1.marcador]}  -  ${game.jugador2.puntos[game.jugador2.marcador]}  ${game.jugador2.nombre}  `);
         }),
 
-        checkWin: checkWin = (()=>{
+        getRoundScore: getRoundScore = (()=>{
+            console.log(`Rondas ${game.jugador1.nombre}  ${game.jugador1.rondas}  -  ${game.jugador2.rondas}  ${game.jugador2.nombre}  `);
+        }),
+
+        getMatchScore : getMatchScore = (()=>{
+            console.log(`Juegos ${game.jugador1.nombre}  ${game.jugador1.juegos}  -  ${game.jugador2.juegos}  ${game.jugador2.nombre}  `);
+        }),
+
+        checkWinRound: checkWinRound = (()=>{
             
             if (game.jugador1.marcador === 4 ){
                 game.jugador1.rondas +=1;
-                console.log(`El jugador ${game.jugador1.nombre}`);
+                console.log(`El jugador ${game.jugador1.nombre} gana la ronda`);
                 game.win=true;
                 
             }else if(game.jugador2.marcador ===4){
                 game.jugador2.rondas+=1;
-                console.log(`El jugador ${game.jugador1.nombre}`);
+                console.log(`El jugador ${game.jugador2.nombre} gana la ronda`);
                 game.win=true;                
             }
             if (game.win===true){
@@ -88,6 +114,19 @@ const createMatch =  ((player1, player2) =>{
             game.jugador1.marcador =0;
             game.jugador2.marcador=0;
             game.win=false;
+        }),
+        checkDeuce: checkDeuce = (()=>{
+            
+            if(game.jugador1.marcador === 3 && game.jugador2.marcador===3){
+                game.deuce=true;
+                game.jugador1.marcador=5;
+                game.jugador2.marcador=5;
+            }
+            return game.deuce;            
+
+        }),
+        playDeuce:playDeuce=(()=>{
+            
         }),
 
      };
@@ -101,10 +140,18 @@ const createMatch =  ((player1, player2) =>{
 const game = createMatch('Saul', 'Aida');
 console.log(game);
 game.pointWonBy(1);
-game.pointWonBy(1);
-game.pointWonBy(1);
-game.pointWonBy(2);
-game.pointWonBy(2);
-game.pointWonBy(1);
 
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(2);
+game.pointWonBy(2);
+game.pointWonBy(2);
+
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.getMatchScore();
+console.log(game.checkDeuce());
+game.pointWonBy(2);
+game.getCurrentRoundScore();
+game.pointWonBy(1);
 game.getCurrentRoundScore();
