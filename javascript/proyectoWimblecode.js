@@ -78,7 +78,8 @@ const createMatch =  ((player1, player2) =>{
             
 
             
-            game.checkWinRound();            
+            game.checkWinRound();
+            game.checkWinGame();            
          }),
 
         getCurrentRoundScore: getCurrentRoundScore =(()=>{
@@ -125,8 +126,25 @@ const createMatch =  ((player1, player2) =>{
             return game.deuce;            
 
         }),
-        playDeuce:playDeuce=(()=>{
+        checkWinGame:checkWinGame=(()=>{
             
+            if (game.jugador1.rondas >=4 || game.jugador1.rondas >=4){
+                if(Math.abs(game.jugador1.rondas-game.jugador2.rondas)>=2 || game.jugador1.rondas===7 || game.jugador2.rondas===7){
+                    if (game.jugador1.rondas>game.jugador2.rondas){
+                        console.log(`Ha ganado el juego el jugador1`);
+                        game.jugador1.juegos +=1;
+                        game.resetRondas();
+                    }else{
+                        console.log('Ha ganado el juego el jugador 2')
+                        game.jugador2.juegos+=1;
+                        game.resetRondas();
+                    }
+                }
+            }
+        }),
+        resetRondas:resetRondas =(()=>{
+            game.jugador1.rondas =0;
+            game.jugador2.rondas =0;
         }),
 
      };
@@ -155,3 +173,42 @@ game.pointWonBy(2);
 game.getCurrentRoundScore();
 game.pointWonBy(1);
 game.getCurrentRoundScore();
+game.pointWonBy(2);
+game.getCurrentRoundScore();
+game.pointWonBy(2);
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.pointWonBy(1);
+
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(2);
+game.pointWonBy(2);
+game.pointWonBy(2);
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.getRoundScore();
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getMatchScore();
+
+
