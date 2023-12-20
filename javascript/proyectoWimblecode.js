@@ -79,7 +79,8 @@ const createMatch =  ((player1, player2) =>{
 
             
             game.checkWinRound();
-            game.checkWinGame();            
+            game.checkWinGame();
+            game.checkWinMatch();            
          }),
 
         getCurrentRoundScore: getCurrentRoundScore =(()=>{
@@ -146,6 +147,27 @@ const createMatch =  ((player1, player2) =>{
             game.jugador1.rondas =0;
             game.jugador2.rondas =0;
         }),
+        checkWinMatch: checkWinMatch = (()=>{
+            if(game.jugador1.juegos ===2){
+                console.log(`El jugador ${game.jugador1.nombre} gana la partida`);
+                console.log(`La partida va a ser reseteada`);
+                game.resetMatch();
+            } else if(game.jugador2.juegos ===2){
+                console.log(`El jugador ${game.jugador1.nombre} gana la partida`);
+                console.log(`La partida va a ser reseteada`);
+                game.resetMatch();
+            }
+        }),
+        resetMatch: resetMatch = (()=>{
+            game.jugador1.marcador=0;
+            game.jugador1.rondas=0;            
+            game.jugador1.juegos=0;
+            game.jugador2.marcador=0;
+            game.jugador2.rondas=0;
+            game.jugador2.juegos=0;
+
+        }),
+
 
      };
     
@@ -210,5 +232,28 @@ game.pointWonBy(1);
 game.pointWonBy(1);
 game.pointWonBy(1);
 game.getMatchScore();
+game.getCurrentRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getRoundScore();
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.pointWonBy(1);
+game.getCurrentRoundScore();
+game.getMatchScore();
+game.getRoundScore();
+
 
 
