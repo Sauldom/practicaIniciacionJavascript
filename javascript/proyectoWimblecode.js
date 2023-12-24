@@ -1,6 +1,6 @@
 
 
-jugadores = ['Alberto Casero', 'David Jiménez',    'Javier de Miguel', 'Eduardo Aguilar'];
+
 
 //el que gana un partido pasa si gana el siguiente es el campeon
 
@@ -32,7 +32,6 @@ Funcionamiento del software a desarrollar
 Nuestro cliente, nos dijo como debería de funcionar este software y nos dejo los métodos
 que quiere para poder probarlo. Este sería el ejemplo que nos dio:
 */
-
 const createMatch =  ((player1, player2) =>{
      let game = {
         jugador1:{
@@ -153,7 +152,7 @@ const createMatch =  ((player1, player2) =>{
                 console.log(`La partida va a ser reseteada`);
                 game.resetMatch();
             } else if(game.jugador2.juegos ===2){
-                console.log(`El jugador ${game.jugador1.nombre} gana la partida`);
+                console.log(`El jugador ${game.jugador2.nombre} gana la partida`);
                 console.log(`La partida va a ser reseteada`);
                 game.resetMatch();
             }
