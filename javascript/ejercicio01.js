@@ -28,9 +28,11 @@ let usuario = {
         fechaInicio:'2024-03-25'
         }
 
-    ]
+    ],
+    busquedaActiva:true,
 
     
 }
 
 console.log(usuario.temas[2].fechaInicio);
+alert(usuario.temas[2].fechaInicio);

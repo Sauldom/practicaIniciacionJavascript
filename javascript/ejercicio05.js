@@ -50,9 +50,20 @@ duración de todas las canciones en el catálogo. (opcional)
 */
     function crearCatalogo(){
 
-      this.catalogo=[];
+      let catalogo=[];
 
-      function agregarCancion(name, genre, duration){
+      function agregarCancion(){
+        let name = prompt('Introduce el nombre de la cancion: ');
+        let genre = prompt('Introduce el nombre del estilo: ');
+        let minutes= parseInt((prompt('Introduce la duración de la cancion: \n Minutos: ')));
+        while(isNaN(minutes)){
+          minutes=parseInt((prompt('Introduce la duración de la cancion: \n Minutos: ')));;
+        }
+        let seconds = 60 ;
+        while (seconds >=60 || isNaN(seconds)){
+          seconds= parseInt((prompt(`Segundos: `)));
+        };
+        let duration = minutes.toString()+':'+seconds.toString();
         catalogo.push({
           nombre: name,
           genero : genre,
@@ -76,20 +87,35 @@ duración de todas las canciones en el catálogo. (opcional)
       function buscarCancionesGenero(genero=prompt('Introduce el genero musical a buscar: ')){
           
         const result = catalogo.filter((cancion) =>cancion.genero === genero);
+        
         if (result.length ===0){
           console.log('No hay ninguna cancion con ese genero');
          }else{
-          console.log(result);
+          for(let i=0;i<result.length;i++){
+            console.log(result[i].nombre);
+          }
         };
+        
       };
 
       function calcularPromedioDuracion(){
-        let suma =0;
+        let suma =0;        
         for(i=0;i<catalogo.length;i++){
-          suma+=catalogo[i].duracion;
+          let durationArray=catalogo[i].duracion.split(':');
+          durationSeconds = (parseInt(durationArray[0])*60) +parseInt(durationArray[1]);
+          suma+=durationSeconds;
         }
-        return suma/catalogo.length;
+        let sumaSeconds = Math.round(suma/catalogo.length);        
+        return secondsToMin(sumaSeconds);
       };
+      function secondsToMin(seconds){
+        
+        let minutos = Math.floor((seconds / 60) % 60);
+        minutos = (minutos < 10)? '0' + minutos : minutos;
+        let segundos= seconds % 60;
+        segundos = (segundos < 10)? '0' + segundos : segundos;
+        return minutos+':'+segundos;
+      }
         
         return {
           agregarCancion: agregarCancion,
@@ -104,17 +130,18 @@ duración de todas las canciones en el catálogo. (opcional)
 
     let miCatalogo = crearCatalogo();
     miCatalogo.listarCanciones();
-
-    miCatalogo.agregarCancion('Master of puppets', 'Metal',8.35 );
-    miCatalogo.agregarCancion('anvil of crom', 'OST',2.38  );
-    miCatalogo.agregarCancion('hola', 'pop',3.38  );
-
+    miCatalogo.agregarCancion();
+    //miCatalogo.agregarCancion('Master of puppets', 'Metal',8.35 );
+    //miCatalogo.agregarCancion('anvil of crom', 'OST',2.38  );
+    //miCatalogo.agregarCancion('hola', 'pop',3.38  );
+    miCatalogo.agregarCancion();
+    miCatalogo.agregarCancion();
     console.log(miCatalogo);
     miCatalogo.verCatalogo();
     miCatalogo.listarCanciones();
     miCatalogo.buscarCancionesGenero();
-    miCatalogo.agregarCancion('hola2', 'pop',3.38  );
-    miCatalogo.agregarCancion('hola3', 'pop',3.38  );
+    //miCatalogo.agregarCancion('hola2', 'pop',3.38  );
+   // miCatalogo.agregarCancion('hola3', 'pop',3.38  );
     miCatalogo.buscarCancionesGenero();
     console.log(miCatalogo.calcularPromedioDuracion());
 
